@@ -14,8 +14,9 @@ app.get('/', (req, res) => {
   client.software = ua.slice(openBracket + 1, closeBracket);
 
   // get ip
-  client.ipaddress = req.ip;
+  client.ipaddress = req.socket.localAddress;
 
+  console.log(req.socket.localAddress);
   res.send(client);
 });
 
