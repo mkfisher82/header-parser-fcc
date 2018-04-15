@@ -14,9 +14,10 @@ app.get('/', (req, res) => {
   client.software = ua.slice(openBracket + 1, closeBracket);
 
   // get ip
-  client.ipaddress = req.socket.localAddress;
+  const clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  client.ipaddress = clientIp;
 
-  console.log(req.socket.localAddress);
+  console.log(clientIp);
   res.send(client);
 });
 
